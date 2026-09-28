@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-title dashboard-head">
+  <div>
+    <p class="eyebrow">Analysis dashboard</p>
+    <h1>Inspect the keystroke models across passwords</h1>
+    <p class="lead">Choose a password to refresh the charts for variance, correlation, KNN, correlation-KDA, and t-SNE.</p>
+  </div>
+  <div class="dashboard-picker">
+    <label>
+      Password
+      <select id="dashboardPassword">
+        {% for password, info in passwords.items() %}
+        <option value="{{ password }}">{{ password }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      t-SNE perplexity
+      <input id="perplexity" type="number" min="5" max="50" value="30">
+    </label>
+    <button id="refreshDashboard" class="button primary" type="button">Refresh</button>
+  </div>
+</section>
+
+<section class="summary-strip" id="summaryStrip"></section>
+
+<section class="tabs">
+  <button class="tab-button active" data-tab="variance">Variance</button>
+  <button class="tab-button" data-tab="correlation">Correlation</button>
+  <button class="tab-button" data-tab="knn">KNN</button>
+  <button class="tab-button" data-tab="kda">Correlation KDA</button>
+  <button class="tab-button" data-tab="tsne">t-SNE</button>
+</section>
+
+<section class="tab-panels">
+  <article class="panel tab-panel active" id="tab-variance">
+    <div class="panel-header">
+      <h2>Variance analysis</h2>
+    </div>
+    <canvas id="varianceChart" height="140"></canvas>
+    <div id="varianceTable" class="table-wrap"></div>
+  </article>
+
+  <article class="panel tab-panel" id="tab-correlation">
+    <div class="panel-header">
+      <h2>Pearson correlation matrix</h2>
+    </div>
+    <div id="correlationTable" class="table-wrap"></div>
+  </article>
+
+  <article class="panel tab-panel" id="tab-knn">
+    <div class="panel-header">
+      <h2>KNN classification</h2>
+    </div>
+    <canvas id="knnChart" height="140"></canvas>
+    <div id="knnTable" class="table-wrap"></div>
+  </article>
+
+  <article class="panel tab-panel" id="tab-kda">
+    <div class="panel-header">
+      <h2>Correlation-based KDA</h2>
+    </div>
+    <div id="kdaTable" class="table-wrap"></div>
+  </article>
+
+  <article class="panel tab-panel" id="tab-tsne">
+    <div class="panel-header">
+      <h2>t-SNE visualization</h2>
+    </div>
+    <canvas id="tsneChart" height="180"></canvas>
+  </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

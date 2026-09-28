@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title or "Keystroke Dynamics Authentication" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="background-orb orb-one"></div>
+  <div class="background-orb orb-two"></div>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-mark">KDA</span>
+      <span class="brand-text">Keystroke Dynamics Authentication</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/" class="{% if active_page == 'home' %}active{% endif %}">Home</a>
+      <a href="/collect" class="{% if active_page == 'collect' %}active{% endif %}">Collect</a>
+      <a href="/dashboard" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

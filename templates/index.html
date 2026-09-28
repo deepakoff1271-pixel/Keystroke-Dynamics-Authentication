@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Final Project Delivery</p>
+    <h1>Behavioral authentication that recognizes how a password is typed.</h1>
+    <p class="lead">
+      This finished version collects keystroke timings, generates a baseline dataset, and runs variance,
+      correlation, KNN, correlation-based KDA, and t-SNE analysis from one Flask application.
+    </p>
+    <div class="hero-actions">
+      <a class="button primary" href="/collect">Start data collection</a>
+      <a class="button secondary" href="/dashboard">Open analysis dashboard</a>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <div class="metric-grid">
+      <div class="metric-card">
+        <span class="metric-label">Passwords</span>
+        <strong>{{ passwords|length }}</strong>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">Defence users</span>
+        <strong>5</strong>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">Attack profiles</span>
+        <strong>33</strong>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">Core metrics</span>
+        <strong>PP / RP / HT</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <p class="eyebrow">Dataset overview</p>
+      <h2>Passwords used in the study-inspired implementation</h2>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Password</th>
+          <th>Keystrokes</th>
+          <th>Feature dimensions</th>
+          <th>Entropy</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for password, info in passwords.items() %}
+        <tr>
+          <td>{{ password }}</td>
+          <td>{{ info.keystrokes }}</td>
+          <td>{{ info.dimensions }}</td>
+          <td>{{ info.entropy }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card-grid">
+  <article class="panel compact">
+    <p class="eyebrow">Workflow</p>
+    <h3>Capture, analyze, compare</h3>
+    <p>Collect browser timing events, convert them into fixed-text features, and compare them across models.</p>
+  </article>
+  <article class="panel compact">
+    <p class="eyebrow">Analyses</p>
+    <h3>Multiple views of the same signal</h3>
+    <p>Variance, Pearson correlation, KNN, correlation-based KDA, and t-SNE are available from the dashboard.</p>
+  </article>
+  <article class="panel compact">
+    <p class="eyebrow">Output</p>
+    <h3>Presentation-ready deliverables</h3>
+    <p>The project folder also contains the tutorial and the final review deck generated from the cleaned implementation.</p>
+  </article>
+</section>
+{% endblock %}

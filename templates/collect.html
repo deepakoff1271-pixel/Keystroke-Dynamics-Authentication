@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-title">
+  <p class="eyebrow">Keystroke capture</p>
+  <h1>Record a password attempt in the browser</h1>
+  <p class="lead">Type the displayed password, then press Enter to save the captured key timings to the project data folder.</p>
+</section>
+
+<section class="panel collect-layout">
+  <div class="collect-controls">
+    <label>
+      Password
+      <select id="passwordSelect">
+        {% for password, info in passwords.items() %}
+        <option value="{{ password }}">{{ password }} — {{ info.keystrokes }} keys</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      Session type
+      <select id="sessionType">
+        <option value="defence">Defence</option>
+        <option value="attack">Attack</option>
+      </select>
+    </label>
+    <label>
+      Participant ID
+      <input id="participantId" type="text" value="1" placeholder="1">
+    </label>
+    <button id="startButton" class="button primary" type="button">Start capture</button>
+  </div>
+
+  <div class="collect-stage">
+    <div class="capture-card">
+      <span class="metric-label">Target password</span>
+      <div id="targetPassword" class="target-password">observer</div>
+      <input id="typingField" class="typing-field" type="text" autocomplete="off" spellcheck="false" autocapitalize="off" />
+      <p class="hint">Keep typing naturally. Backspace resets the capture. Press Enter when the password is correct.</p>
+    </div>
+
+    <div class="capture-log">
+      <div class="panel-header slim">
+        <h2>Status</h2>
+        <span id="statusBadge" class="status-badge idle">Idle</span>
+      </div>
+      <div id="eventLog" class="log-window"></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/keystroke_logger.js') }}"></script>
+{% endblock %}
