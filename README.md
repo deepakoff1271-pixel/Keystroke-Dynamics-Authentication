@@ -53,3 +53,30 @@ visualization**.
 ---
 
 ## 📁 Project Structure
+final project/
+│
+├── app.py # Flask entry point — routes & API endpoints
+├── analyzer.py # All analysis algorithms
+├── data_processor.py # Data generation, loading & feature extraction
+├── requirements.txt # Python dependencies
+├── README.md # This file
+├── tutorial.md # Step-by-step usage guide
+├── final_review_presentation.md # Slide source (Marp format)
+├── Final_Review_Presentation.pptx # Exported PowerPoint deck
+│
+├── templates/ # Jinja2 HTML templates
+│ ├── base.html # Common layout (header, nav, orbs)
+│ ├── index.html # Home page
+│ ├── collect.html # Keystroke capture UI
+│ └── dashboard.html # Tabbed analysis dashboard
+│
+├── static/ # Frontend assets
+│ ├── css/
+│ │ └── style.css # Dark theme with grid background
+│ └── js/
+│ ├── keystroke_logger.js # Capture events → POST /api/save_keystrokes
+│ └── dashboard.js # Fetch APIs → render charts & tables
+│
+└── data/ # Auto-generated on first run
+├── defence_<password>.csv # Defence (enrolment) samples
+└── attack_<password>.csv # Attack (impostor) samples
